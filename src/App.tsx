@@ -3,8 +3,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import StudentDashboard from "./pages/StudentDashboard";
 import TeacherDashboard from "./pages/TeacherDashboard";
-import NotFound from "./pages/NotFound";
 import CoursePage from "./pages/CoursePage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -16,7 +16,6 @@ function App() {
       <Route path="/course/:id" element={<CoursePage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
-    
   );
 }
 

@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { supabase } from '@/lib/supabase';
-import { Plus } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
+import { Plus } from "lucide-react";
+import { LogoutButton } from "@/components/LogoutButton"; // Import LogoutButton
 
 interface Course {
     id: string;
@@ -22,32 +23,32 @@ export default function TeacherDashboard() {
         if (!user) return;
 
         const { data, error } = await supabase
-            .from('courses')
-            .select('*')
-            .eq('teacher_id', user.id);
+            .from("courses")
+            .select("*")
+            .eq("teacher_id", user.id);
 
         if (error) {
-            console.error('Error fetching courses:', error.message);
+            console.error("Error fetching courses:", error.message);
         } else {
             setCourses(data || []);
         }
     };
 
     const handleCreateCourse = async () => {
-        const title = prompt('Enter course title:');
-        const description = prompt('Enter course description:');
+        const title = prompt("Enter course title:");
+        const description = prompt("Enter course description:");
         const user = (await supabase.auth.getUser()).data.user;
 
         if (!title || !user) return;
 
-        const { error } = await supabase.from('courses').insert({
+        const { error } = await supabase.from("courses").insert({
             title,
             description,
             teacher_id: user.id,
         });
 
         if (error) {
-            console.error('Error creating course:', error.message);
+            console.error("Error creating course:", error.message);
         } else {
             fetchCourses();
         }
@@ -65,9 +66,12 @@ export default function TeacherDashboard() {
         <div className="p-6 space-y-4">
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl font-bold">Your Courses</h1>
-                <Button onClick={handleCreateCourse}>
-                    <Plus className="mr-2 h-4 w-4" /> Create Course
-                </Button>
+                <div className="flex items-center gap-4">
+                    <Button onClick={handleCreateCourse}>
+                        <Plus className="mr-2 h-4 w-4" /> Create Course
+                    </Button>
+                    <LogoutButton />
+                </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {courses.map((course) => (
