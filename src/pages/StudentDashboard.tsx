@@ -77,33 +77,44 @@ export default function StudentDashboard() {
     };
 
     return (
-        <div className="p-6 space-y-4">
-            <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-bold">Enrolled Courses</h1>
+        <div className="p-6 space-y-6 max-w-7xl mx-auto">
+            <div className="flex justify-between items-center border-b pb-4">
+                <h1 className="text-3xl font-bold tracking-tight">Enrolled Courses</h1>
                 <LogoutButton />
             </div>
-
+    
             {loading ? (
-                <p className="text-muted-foreground text-sm">Loading your courses...</p>
+                <div className="flex justify-center items-center min-h-[300px]">
+                    <p className="text-lg text-muted-foreground">Loading your courses...</p>
+                </div>
             ) : courses.length === 0 ? (
-                <p className="text-muted-foreground text-sm">
-                    You are not enrolled in any courses yet.
-                </p>
+                <div className="flex justify-center items-center min-h-[300px]">
+                    <p className="text-lg text-muted-foreground">
+                        You are not enrolled in any courses yet.
+                    </p>
+                </div>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {courses.map((course) => (
                         <Card
                             key={course.id}
-                            className="cursor-pointer hover:shadow-lg transition"
+                            className="cursor-pointer hover:shadow-lg transition-all duration-200 group overflow-hidden h-full" // Added h-full
                             onClick={() => handleCourseClick(course.id)}
                         >
-                            <CardContent className="p-4">
-                                <h2 className="text-lg font-semibold">
-                                    {course.title || "No Title"}
-                                </h2>
-                                <p className="text-sm text-muted-foreground">
-                                    {course.description || "No Description"}
-                                </p>
+                            <CardContent className="p-6 h-full flex flex-col justify-between">
+                                <div>
+                                    <h2 className="text-xl font-semibold mb-3">
+                                        {course.title || "Untitled Course"}
+                                    </h2>
+                                    <p className={`text-sm text-muted-foreground ${
+                                        course.description ? "line-clamp-3" : "italic"
+                                    }`}>
+                                        {course.description || "No description available"}
+                                    </p>
+                                </div>
+                                <div className="mt-4 text-xs text-muted-foreground border-t pt-2">
+                                    Created: {new Date(course.created_at).toLocaleDateString()}
+                                </div>
                             </CardContent>
                         </Card>
                     ))}

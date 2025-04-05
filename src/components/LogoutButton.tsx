@@ -10,5 +10,12 @@ export function LogoutButton() {
         navigate("/");
     };
 
-    return <button onClick={handleLogout}>Logout</button>;
+    return (
+        <button
+            onClick={handleLogout}
+            className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-semibold shadow-md"
+        >
+            Logout
+        </button>
+    );
 }
