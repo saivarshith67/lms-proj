@@ -37,13 +37,12 @@ export default function Login() {
                 return setError(profileError?.message || "No role found for this user");
             }
 
-            // Redirect based on role
             navigate(profile.role === "teacher" ? "/teacher" : "/student");
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="w-screen h-screen flex items-center justify-center bg-gray-100">
             <Card className="w-96 shadow-lg">
                 <CardHeader>
                     <CardTitle className="text-center text-xl font-semibold">Login</CardTitle>
@@ -80,7 +79,6 @@ export default function Login() {
                     </p>
                 </CardContent>
             </Card>
-
         </div>
     );
 }

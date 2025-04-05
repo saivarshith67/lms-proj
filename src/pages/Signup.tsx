@@ -33,7 +33,6 @@ export default function Signup() {
             return setError("User signup failed");
         }
 
-        // Insert profile into 'profiles' table
         const { error: profileInsertError } = await supabase.from("profiles").insert({
             id: user.id,
             email,
@@ -45,13 +44,12 @@ export default function Signup() {
             return setError(profileInsertError.message);
         }
 
-        // Redirect to login
         navigate("/");
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <Card className="w-96 shadow-lg">
+        <div className="w-screen h-screen flex items-center justify-center bg-gray-50">
+            <Card className="w-full max-w-md shadow-lg rounded-xl border">
                 <CardHeader>
                     <CardTitle className="text-center text-xl font-semibold">Sign Up</CardTitle>
                 </CardHeader>
@@ -95,7 +93,10 @@ export default function Signup() {
 
                         <div>
                             <Label>Role</Label>
-                            <Select value={role} onValueChange={(value: string) => setRole(value as "student" | "teacher")}>
+                            <Select
+                                value={role}
+                                onValueChange={(value: string) => setRole(value as "student" | "teacher")}
+                            >
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select Role" />
                                 </SelectTrigger>
@@ -106,7 +107,9 @@ export default function Signup() {
                             </Select>
                         </div>
 
-                        <Button type="submit" className="w-full">Create Account</Button>
+                        <Button type="submit" className="w-full">
+                            Create Account
+                        </Button>
                     </form>
 
                     <p className="text-sm text-center mt-4">
