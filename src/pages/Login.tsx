@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -44,18 +43,25 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-transparent">
-      <Card className="w-[540px] bg-[#fefae0]/70 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-white/30">
-        <CardHeader>
-          <CardTitle className="text-center text-[28px] font-bold text-gray-800">
-            Login
-          </CardTitle>
-        </CardHeader>
+    <div className="flex items-center justify-center min-h-screen w-full bg-[#0f172a] overflow-hidden">
+      {/* Main container with fixed width to prevent background images from showing */}
+      <div className="fixed inset-0 bg-[#0f172a] z-0"></div>
 
-        <CardContent>
+      {/* Login content */}
+      <div className="relative z-10 w-full max-w-md px-4">
+        <div className="flex justify-center mb-6">
+          <div className="flex items-center justify-center gap-2 text-white">
+            <span className="text-blue-400 bg-blue-500/20 p-2 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </span>
+            <h1 className="text-[28px] font-bold">Login</h1>
+          </div>
+        </div>
+
+        <div className="bg-[#1e293b] rounded-lg p-6 shadow-lg">
           <form onSubmit={handleLogin} className="space-y-6">
             {error && (
-              <p className="text-red-500 text-sm text-center">{error}</p>
+              <p className="text-red-400 text-sm text-center">{error}</p>
             )}
 
             <Input
@@ -64,7 +70,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full rounded-xl border border-black/30 bg-white/70 backdrop-blur-sm focus:ring-2 focus:ring-blue-400 text-gray-900 placeholder-gray-600"
+              className="w-full rounded-lg border border-[#475569]/50 bg-[#1e293b] focus:ring-2 focus:ring-blue-500 text-gray-200 placeholder-gray-400"
             />
 
             <div className="relative">
@@ -74,12 +80,12 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full rounded-xl border border-black/30 bg-white/70 backdrop-blur-sm focus:ring-2 focus:ring-blue-400 text-gray-900 placeholder-gray-600 pr-12"
+                className="w-full rounded-lg border border-[#475569]/50 bg-[#1e293b] focus:ring-2 focus:ring-blue-500 text-gray-200 placeholder-gray-400 pr-12"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm transition-all duration-300 text-black/70 hover:text-blue-600 focus:outline-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-[#334155]/40 transition-all duration-300 text-gray-400 hover:text-blue-400 focus:outline-none"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? (
@@ -92,23 +98,23 @@ export default function Login() {
 
             <Button
               type="submit"
-              className="w-full rounded-xl text-base bg-gradient-to-r from-orange-400 to-yellow-500 text-white hover:from-orange-500 hover:to-yellow-600 transition-all shadow-md py-2.5"
+              className="w-full rounded-lg text-base bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-md py-2.5"
             >
               Log in
             </Button>
           </form>
 
-          <p className="text-sm text-center mt-6 text-gray-700">
-            Don’t have an account?{" "}
+          <p className="text-sm text-center mt-6 text-gray-400">
+            Don't have an account?{" "}
             <span
               onClick={() => navigate("/signup")}
-              className="text-orange-600 underline cursor-pointer hover:text-orange-800 transition"
+              className="text-blue-400 cursor-pointer hover:text-blue-300 transition"
             >
               Create one
             </span>
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
