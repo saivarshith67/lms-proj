@@ -1,3 +1,4 @@
+//Login.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
@@ -94,6 +95,16 @@ export default function Login() {
                   <AiOutlineEye size={20} />
                 )}
               </button>
+            </div>
+
+            {/* Added Forgot Password Link */}
+            <div className="flex justify-end">
+              <span
+                onClick={() => navigate("/resetpass")}
+                className="text-sm text-blue-400 cursor-pointer hover:text-blue-300 transition"
+              >
+                Forgot password?
+              </span>
             </div>
 
             <Button
